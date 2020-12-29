@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:lab3_flutter/pages/details.dart';
 import 'package:lab3_flutter/pages/home.dart';
-//import 'package:lab3_flutter/data.dart';
 
 void main() {
 
@@ -24,7 +23,7 @@ void main() {
   // fed42545a22a8fd60bdb78f711bc64d4e28a777d
 
   final AuthLink authLink = AuthLink(
-    getToken: () async => 'Bearer <fed42545a22a8fd60bdb78f711bc64d4e28a777d>',
+    getToken: () async => 'Bearer <MY_TOKEN>',
   );
 
   final Link link = authLink.concat(httpLink);
