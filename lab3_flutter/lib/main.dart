@@ -8,36 +8,41 @@
 
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:lab3_flutter/pages/details.dart';
+
+// My files
 import 'package:lab3_flutter/pages/home.dart';
 
 void main() {
 
   // SET UP DATABASE ----------------------------------------------------------
 
+  final String accessToken = 'ENTER_TOKEN_HERE';
+
+  /*
+  OLD CODE THAT DIDN'T WORK:
+  --------------------------
   final HttpLink httpLink = HttpLink(uri: "https://api.github.com/graphql");
+  final AuthLink authLink = AuthLink(
+    getToken: () => 'Bearer <$accessToken>',
+  );
+  final Link link = authLink.concat(httpLink);
+  */
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  //final String accessToken = "b0f11a5b42b88acd23d75b11c09aacb4b852c644";
-  // fed42545a22a8fd60bdb78f711bc64d4e28a777d
-
-  final AuthLink authLink = AuthLink(
-    getToken: () async => 'Bearer <MY_TOKEN>',
-  );
-
-  final Link link = authLink.concat(httpLink);
-
-  ValueNotifier<GraphQLClient> client = ValueNotifier(
+  // Added 'accessToken' as String argument in 'client'
+  ValueNotifier<GraphQLClient> client(String accessToken) => ValueNotifier(
     GraphQLClient(
       cache: InMemoryCache(),
-      link: link,
+      link: HttpLink(uri: 'https://api.github.com/graphql',
+                      headers: {"authorization": "Bearer $accessToken"}),
     ),
   );
 
   //---------------------------------------------------------------------------
 
-  runApp(MyApp(client: client));
+  // Added 'accessToken' as String argument in 'client'
+  runApp(MyApp(client: client(accessToken)));
 }
 
 class MyApp extends StatelessWidget {
@@ -46,7 +51,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    //final textTheme = Theme.of(context).textTheme;
 
     return GraphQLProvider(
       client: client,

@@ -1,10 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
+
+// My files
+import 'package:lab3_flutter/RepoData.dart';
 
 class DetailsPage extends StatelessWidget {
+
+  final RepoData repoData;
+  DetailsPage(this.repoData, {Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.pink[100],
       body: Column(
@@ -15,11 +21,11 @@ class DetailsPage extends StatelessWidget {
 
           // --- TITLE ---
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Hello I am the title',
+                repoData.title,
                 style: TextStyle(
                   fontSize: 25.0,
                   color: Colors.white,
@@ -28,27 +34,24 @@ class DetailsPage extends StatelessWidget {
             ),
           ),
 
-          //SizedBox(height: 20.0),
-
           // --- DESCRIPTION ---
           Expanded(
-            flex: 1,
+            flex: 6,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'TITLE - Hello I am the description',
+                repoData.description,
                 style: TextStyle(
                   fontSize: 18.0,
-                  color: Colors.grey[800],
+                  color: Colors.black,
                 ),
               ),
             ),
           ),
 
-          SizedBox(height: 40.0),
-
+          // --- INFO ---
           Expanded(
-            flex: 8,
+            flex: 6,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -57,10 +60,10 @@ class DetailsPage extends StatelessWidget {
                   children: <Widget>[
                     // --- LICENSE ---
                     Text(
-                      'License',
+                      'Owner',
                       style: TextStyle(
                         fontSize: 14.0,
-                        color: Colors.grey[800],
+                        color: Colors.white,
                       ),
                     ),
 
@@ -71,7 +74,7 @@ class DetailsPage extends StatelessWidget {
                       'Commits',
                       style: TextStyle(
                         fontSize: 14.0,
-                        color: Colors.grey[800],
+                        color: Colors.white,
                       ),
                     ),
 
@@ -82,21 +85,32 @@ class DetailsPage extends StatelessWidget {
                       'Branches',
                       style: TextStyle(
                         fontSize: 14.0,
-                        color: Colors.grey[800],
+                        color: Colors.white,
+                      ),
+                    ),
+
+                    SizedBox(height: 30.0),
+
+                    // --- BRANCHES ---
+                    Text(
+                      'Website:',
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.white,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(width: 10.0),
+
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    // --- INSERT FETCHED LICENSE DETAIL ---
+                    // --- FETCHED OWNER DETAIL ---
                     Text(
-                      '[Insert License]',
+                      repoData.owner,
                       style: TextStyle(
                         fontSize: 14.0,
-                        color: Colors.grey[800],
+                        color: Colors.black,
                       ),
                     ),
 
@@ -104,12 +118,12 @@ class DetailsPage extends StatelessWidget {
                       height: 30.0,
                     ),
 
-                    // --- INSERT FETCHED COMMITS DETAIL ---
+                    // --- FETCHED COMMITS DETAIL ---
                     Text(
-                      '[200]',
+                      repoData.commits.toString(),
                       style: TextStyle(
                         fontSize: 14.0,
-                        color: Colors.grey[800],
+                        color: Colors.black,
                       ),
                     ),
 
@@ -117,12 +131,25 @@ class DetailsPage extends StatelessWidget {
                       height: 30.0,
                     ),
 
-                    // --- INSERT FETCHED BRANCH DETAIL ---
+                    // --- FETCHED BRANCH DETAIL ---
                     Text(
-                      '[5]',
+                      repoData.branches.toString(),
                       style: TextStyle(
                         fontSize: 14.0,
-                        color: Colors.grey[800],
+                        color: Colors.black,
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: 30.0,
+                    ),
+
+                    // --- FETCHED HOMEPAGE DETAIL ---
+                    Text(
+                      repoData.homepageUrl,
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.black,
                       ),
                     ),
                   ],
