@@ -16,7 +16,7 @@ void main() {
 
   // SET UP DATABASE ----------------------------------------------------------
 
-  final String accessToken = 'ENTER_TOKEN_HERE';
+  final String accessToken = '';
 
   /*
   OLD CODE THAT DIDN'T WORK:

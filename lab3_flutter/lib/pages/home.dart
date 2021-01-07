@@ -29,8 +29,7 @@ class _HomeState extends State<Home> {
     "C++",
     "Python",
     "Ruby",
-    "Java",
-    "Java",
+    "Java"
   ];
 
   final String readRepositories = """
